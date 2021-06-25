@@ -204,7 +204,7 @@ export default class BasicDay extends Component<BasicDayProps> {
   }
 
   renderContainer() {
-    const {activeOpacity} = this.marking;
+    const {activeOpacity, customStyles} = this.marking;
 
     return (
       <TouchableOpacity
