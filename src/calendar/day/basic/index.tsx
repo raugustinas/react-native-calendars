@@ -209,7 +209,6 @@ export default class BasicDay extends Component<BasicDayProps> {
     return (
       <TouchableOpacity
         testID={this.props.testID}
-        style={this.getContainerStyle()}
         disabled={this.shouldDisableTouchEvent()}
         activeOpacity={activeOpacity}
         onPress={!this.shouldDisableTouchEvent() ? this.onPress : undefined}
@@ -218,7 +217,23 @@ export default class BasicDay extends Component<BasicDayProps> {
         accessibilityRole={this.isDisabled() ? undefined : 'button'}
         accessibilityLabel={this.props.accessibilityLabel}
       >
-        {this.isMultiPeriod() ? this.renderText() : this.renderContent()}
+        <View style={{
+          width: 32,
+          height: 32,
+          borderRadius: 16,
+          overflow: 'hidden',
+          transform: [{
+            rotate: '-45deg'
+          }
+          ]
+        }}
+        >
+          <View style={{flex: 1, backgroundColor: customStyles?.container?.firstColor || 'transparent'}}/>
+          <View style={{flex: 1, backgroundColor: customStyles?.container?.secondColor || 'transparent'}}/>
+        </View>
+        <Text allowFontScaling={false} style={[this.getTextStyle(), {position: 'absolute', alignSelf: 'center'}]}>
+          {String(this.props.children)}
+        </Text>
       </TouchableOpacity>
     );
   }
